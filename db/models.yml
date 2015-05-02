@@ -1,0 +1,49 @@
+User
+  user_name: string
+  password: string
+  salt: string
+  profile_pic_path: string
+  gender: boolean
+  id_created_time: datetime
+  nick_name: string
+  place: string
+  last_login_time: datetime
+
+Tag
+  tag_name: string
+
+Post
+  user_id: integer
+  post_time: datetime
+  post_text: text
+  login_latitude: string
+  login_longitude: string
+  restaurant_id: integer
+  restaurant_name: string
+  rating: integer
+
+Picture
+  post_id: integer
+  img_path: string
+
+Mark
+  user_id: integer
+  tag_id: integer
+
+Like
+  user_id: integer
+  post_id: integer
+
+Reply
+  user_id: integer
+  post_id: integer
+  content: text
+
+Friend
+  user_id: integer
+  friend_id: integer
+
+Follow
+  user_id: integer
+  follower_id: integer
+
