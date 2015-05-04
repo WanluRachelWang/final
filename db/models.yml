@@ -16,8 +16,8 @@ Post
   user_id: integer
   post_time: datetime
   post_text: text
-  login_latitude: string
-  login_longitude: string
+  latitude: string
+  longitude: string
   restaurant_id: integer
   restaurant_name: string
   rating: integer
@@ -38,6 +38,7 @@ Reply
   user_id: integer
   post_id: integer
   content: text
+  time: datetime
 
 Friend
   user_id: integer
