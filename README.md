@@ -9,3 +9,6 @@ Finish first version design of models
   * Create seed.rb
   * Create test pages for user post a post
 
+- Further tasks
+ * Reply notice of each user's post
+ * Friend tasks
