@@ -36,6 +36,6 @@ Rails.application.routes.draw do
   get '/users/:id/edit' => 'users#edit', as: 'edit_user'
   patch '/users/:id' => 'users#update'
 
-  get '/users/:id' => 'users#destroy'
+  delete '/users/:id' => 'users#destroy'
 
 end

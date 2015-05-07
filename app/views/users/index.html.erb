@@ -1,3 +1,5 @@
+<p><%= link_to "Add a New User", "/users/new" %></p>
+
 <p><%= @users.count %> Users.</p>
 
 <table class="table table-striped">
@@ -8,6 +10,7 @@
     <th>profile_pic_path</th>
     <th>id_created_time</th>
     <th>nick_name</th>
+    <th>gender</th>
     <th>place</th>
     <th>last_login_time</th>
     <th></th>
@@ -21,10 +24,10 @@
       <td><%= user.profile_pic_path %></td>
       <td><%= user.id_created_time %></td>
       <td><%= user.nick_name %></td>
+      <td><%= user.gender %></td>
       <td><%= user.place %></td>
       <td><%= user.last_login_time %></td>
       <td><%= link_to "Edit...", "/users/#{user.id}/edit" %></td>
-      <!-- <a href="/movies/1/delete">Delete</a> -->
 
       <td><%= link_to "Delete", "/users/#{user.id}", :method => 'delete' %></td>
     </tr>

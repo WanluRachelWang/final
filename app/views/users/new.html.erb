@@ -1,0 +1,43 @@
+<%= form_tag "/users" do %>
+
+  <div>
+    <%= label_tag :user_name %>
+    <%= text_field_tag :user_name, "", placeholder: 'Example: user_name' %>
+  </div>
+
+  <div>
+    <%= label_tag :password %>
+    <%= text_field_tag :password, "", placeholder: 'Example: password' %>
+  </div>
+
+  <div>
+    <%= label_tag :salt %>
+    <%= text_field_tag :salt, "", placeholder: 'Example: salt' %>
+  </div>
+
+  <div>
+    <%= label_tag :profile_pic_path %>
+    <%= text_field_tag :profile_pic_path, "", placeholder: 'Example: profile_pic_path' %>
+  </div>
+
+  <div>
+    <%= label_tag :gender %>
+    <select name="gender">
+        <option value="1">Male</option>
+        <option value="0">Female</option>
+    </select>
+  </div>
+
+  <div>
+    <%= label_tag :nick_name %>
+    <%= text_field_tag :nick_name, "", placeholder: 'Example: nick_name' %>
+  </div>
+
+  <input type="submit" name="commit" value="Add User">
+
+<% end %>
+
+
+
+
+

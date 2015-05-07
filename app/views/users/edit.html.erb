@@ -1,0 +1,31 @@
+<%= form_tag "/users/#{@user.id}" , :method => "patch" do %>
+
+  <div>
+    <%= label_tag :user_name %>
+    <%= text_field_tag :user_name, @user.user_name %>
+  </div>
+
+  <div>
+    <%= label_tag :password %>
+    <%= text_field_tag :password, @user.password %>
+  </div>
+
+  <div>
+    <%= label_tag :salt %>
+    <%= text_field_tag :salt, @user.salt %>
+  </div>
+
+  <div>
+    <%= label_tag :profile_pic_path %>
+    <%= text_field_tag :profile_pic_path, @user.profile_pic_path %>
+  </div>
+
+  <div>
+    <%= label_tag :nick_name %>
+    <%= text_field_tag :nick_name, @user.nick_name  %>
+  </div>
+
+  <input type="submit" name="commit" value="Update User">
+
+<% end %>
+
