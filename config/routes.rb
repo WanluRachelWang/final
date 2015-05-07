@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
-  root 'posts#index'
+  root 'users#index'
 
 
   #########################################################
   # The "Golden 7" for accessing the "posts" resource
 
-
   get '/posts/new' => 'posts#new', as: 'new_post'
-  post '/posts' => 'posts#create'
-
   get '/posts' => 'posts#index', as: 'posts'
+
+  post '/posts' => 'posts#create'
   
   #no page for single post
   #get '/posts/:id' => 'posts#show', as: 'post'
@@ -26,7 +25,7 @@ Rails.application.routes.draw do
   get '/users/new' => 'users#new', as: 'new_user'
 
   #no users page, there is only page for single user
-  #get '/users' => 'users#index', as: 'users'
+  get '/users' => 'users#index', as: 'users'
   
   #for register
   post '/users' => 'users#create'
