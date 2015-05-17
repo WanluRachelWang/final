@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'users#index'
 
-
   #########################################################
   # The "Golden 7" for accessing the "posts" resource
 
@@ -37,5 +36,20 @@ Rails.application.routes.draw do
   patch '/users/:id' => 'users#update'
 
   delete '/users/:id' => 'users#destroy'
+
+  #########################################################
+  # The "Golden 7" for accessing the "restaurant" resource
+
+  #no new
+
+  #shows a list of restaurant according to get params
+  get '/restaurants' => 'restaurants#index', as: 'restaurants'
+  
+  #no create
+
+  #for a single resataurant
+  get '/restaurants/:id' => 'restaurants#show', as: 'restaurant'
+
+  #no edit,update and destroy
 
 end
