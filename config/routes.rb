@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   ##### Sign Up and Sign In and Sign Out
   get "/signup" => 'users#new'
   post "/users" => 'users#create'
- 
+  
+  get "/logout" => 'sessions#delete'
   get "/login" => 'sessions#new'
   post '/sessions' => 'sessions#create'
   #########################################################
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
   #get '/users/new' => 'users#new', as: 'new_user'
 
   #no users page, there is only page for single user
-  #get '/users' => 'users#index', as: 'users'
+  get '/users' => 'users#index'#, as: 'users'
   
   #for register
   #post '/users' => 'users#create'

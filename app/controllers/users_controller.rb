@@ -11,22 +11,28 @@ class UsersController < ApplicationController
 	end
 
 	def new
-		
+		@user = User.new
+    render 'new'
 	end
 
 	def create
-		user = User.new
-		user.user_name = params["user_name"]
-		user.password = params["password"]
-		user.salt = params["salt"]
-		user.profile_pic_path = params["profile_pic_path"]
-		user.gender = params["gender"]
-		user.id_created_time = Time.now.to_datetime
-		user.nick_name = params["nick_name"]
-		user.place = params["nick_name"]
-		user.last_login_time = Time.now.to_datetime
-		user.save
-		redirect_to users_url
+		@user = User.new
+		@user.user_name = params["user_name"]
+		@user.salt = ('0'..'z').to_a.shuffle.first(14).join
+		@user.password = Digest::MD5.hexdigest(Digest::MD5.hexdigest(params["password"])+Digest::MD5.hexdigest(@user.salt))
+		confirmation=Digest::MD5.hexdigest(Digest::MD5.hexdigest(params["repassword"])+Digest::MD5.hexdigest(@user.salt))
+		@user.profile_pic_path = params["profile_pic_path"]
+		@user.gender = params["gender"]
+		@user.id_created_time = Time.now.to_datetime
+		@user.nick_name = params["nick_name"]
+		@user.place = params["nick_name"]
+		@user.last_login_time = Time.now.to_datetime
+		
+		if @user.password==confirmation and @user.save
+			redirect_to users_url
+		else 
+			render 'new'
+		end
 	end
 
 	def destroy
