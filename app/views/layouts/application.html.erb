@@ -39,11 +39,19 @@
 	        <button type="submit" class="btn btn-default">Submit</button>
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
+	        <!-- <li> -->
+	        	<!-- <a href="#">Sign In</a> -->
+	        	
+	        	<% if session["user_id"].present? %>
+	        		<li><%= User.find_by(id: session["user_id"]).nick_name %></li>
+	        		<li><%= link_to "Sign Out", '/logout' %></li>
+	        	<% else %>
+	        		<li><%= link_to "Sign In", '/login' %></li>
+	        		<li><%= link_to "Sign Up", '/signup' %></li>
+	        	<% end %>
+	        <!-- </li> -->
 	        <li>
-	        	<a href="#">Sign In</a>
-	        </li>
-	        <li>
-	        	<a href="#">Sign Up</a>
+	        	<!-- <a href="#">Sign Up</a> -->
 	        </li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->

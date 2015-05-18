@@ -15,4 +15,9 @@ class SessionsController < ApplicationController
       redirect_to root_url, notice: "Unknown email."
     end
   end
+
+  def delete
+    session.delete(:user_id)
+    redirect_to root_url
+  end
 end

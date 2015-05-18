@@ -2,7 +2,7 @@
 
   <div>
     <%= label_tag :user_name %>
-    <%= text_field_tag :user_name, "", placeholder: 'Example: user_name' %>
+    <%= text_field_tag :user_name, @user.user_name, placeholder: 'Example: user_name' %>
   </div>
 
   <div>
@@ -11,13 +11,14 @@
   </div>
 
   <div>
-    <%= label_tag :salt %>
-    <%= text_field_tag :salt, "", placeholder: 'Example: salt' %>
+    <%= label_tag :Confirm_Password %>
+    <%= text_field_tag :repassword, "", placeholder: 'Example: password' %>
   </div>
+  
 
   <div>
     <%= label_tag :profile_pic_path %>
-    <%= text_field_tag :profile_pic_path, "", placeholder: 'Example: profile_pic_path' %>
+    <%= text_field_tag :profile_pic_path, @user.profile_pic_path, placeholder: 'Example: profile_pic_path' %>
   </div>
 
   <div>
@@ -30,7 +31,7 @@
 
   <div>
     <%= label_tag :nick_name %>
-    <%= text_field_tag :nick_name, "", placeholder: 'Example: nick_name' %>
+    <%= text_field_tag :nick_name, @user.nick_name, placeholder: 'Example: nick_name' %>
   </div>
 
   <input type="submit" name="commit" value="Add User">
