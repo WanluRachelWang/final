@@ -18,7 +18,7 @@ class RestaurantsController < ApplicationController
 
 	def index
 
-		response = Yelp.client.search('San Francisco', { term: 'food' })
+		response = Yelp.client.search('Chicago', { term: 'food' })
 
 		@businesses = response.businesses
 
