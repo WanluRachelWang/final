@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
 
+  #before action for new and create
+  #if user already logged in, redirect to posts page
+
   def new
-    @user =User.new
+    @user = User.new
   end
 
 	def create
