@@ -25,7 +25,7 @@
   <% if notice.present? %>
     <div class="row">
       <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
         <span class="sr-only">Error:</span>
         <%= notice %>
       </div>
@@ -50,7 +50,7 @@
         <div class="form-group">
           <div class="input-group input-group-lg">
             <%= label_tag 'password', "Password", :class => "input-group-addon" %>
-            <%= text_field_tag 'password', nil, :class => "form-control" %>
+            <%= text_field_tag 'password', nil, :class => "form-control", :type => "password" %>
           </div>
         </div>
 

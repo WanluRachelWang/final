@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
 	def create
 		user = User.find_by(user_name: params[:user_name])
     if user
-      if user.password == params[:password]
+      password_hash = Digest::MD5.hexdigest(Digest::MD5.hexdigest(params[:password])+Digest::MD5.hexdigest(user.salt))
+
+      if user.password == password_hash
         session["user_id"] = user.id
         redirect_to root_url
       else
