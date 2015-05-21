@@ -12,9 +12,10 @@ class UsersController < ApplicationController
 
 	def new
 		@user = User.new
+		flash.discard(:notice)
     render 'new'
 	end
-
+	
 	def create
 		@user = User.new
 		@user.user_name = params["user_name"]
@@ -31,7 +32,12 @@ class UsersController < ApplicationController
 		if @user.password==confirmation and @user.save
 			redirect_to users_url
 		else 
-			render 'new'
+			if @user.password!=confirmation
+				flash[:notice]="password inconsistant."
+				render 'new'
+			else
+				render 'new'
+			end
 		end
 	end
 
