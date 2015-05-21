@@ -1,16 +1,64 @@
-<h>Sign In</h>
+<style>
+  .login-form-title {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 0px;
+  }
 
-<%= form_tag "/sessions" do %>
+  .login-form{
+    margin-top: 50px;
+    background-color: rgba(2555,255,255,0.7);
+  }
 
-  <p>
-    <%= label_tag :user_name %>
-    <%= text_field_tag :user_name %>
-  </p>
+  .submit-button{
+    font-weight: bold;
+  }
 
-  <p>
-    <%= label_tag :password %>
-    <%= text_field_tag :password %>
-  </p>
+  body{
+    background-image: url(<%= image_path('background_blur.jpg') %>);
+    background-size:cover;
+  }
+</style>
 
-  <%= submit_tag "Let Me In!" %>
-<% end %>
+<div class="container">
+
+  <% #if XXX.error do  %>
+    <div class="row">
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        Enter a valid email address
+      </div>
+    </div>
+  <% #end %>
+
+  <div class="row">
+
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 login-form">
+
+      <%= form_tag "/sessions" do %>
+
+        <h2 class="login-form-title">Sign In</h2>
+
+        <div class="form-group">
+          <div class="input-group input-group-lg">
+            <%= label_tag 'user_name', "Username", :class => "input-group-addon" %>
+            <%= text_field_tag 'user_name', nil, :class => "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group input-group-lg">
+            <%= label_tag 'password', "Password", :class => "input-group-addon" %>
+            <%= text_field_tag 'password', nil, :class => "form-control" %>
+          </div>
+        </div>
+
+        <%= submit_tag "Login", class: "btn btn-primary btn-lg btn-block submit-button" %>
+
+     <% end %>
+    </div>
+
+  </div>
+
+</div>

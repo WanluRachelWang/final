@@ -15,3 +15,17 @@
 /log/*
 !/log/.keep
 /tmp
+.idea/.generators
+.idea/.name
+.idea/.rakeTasks
+.idea/codeStyleSettings.xml
+.idea/dictionaries/xuchen.xml
+.idea/final.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/runConfigurations/Development__final.xml
+.idea/runConfigurations/Production__final.xml
+.idea/runConfigurations/spec__final.xml
+.idea/runConfigurations/test__final.xml

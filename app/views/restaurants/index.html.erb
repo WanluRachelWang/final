@@ -1,0 +1,184 @@
+<style type="text/css">
+  #map_canvas {
+    height: 100%
+  }
+  .map-div{
+    height: 40em;
+  }
+
+  .business{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 5px;
+    height: 155px;
+    border: 1px solid #DDD;
+    margin-bottom: 10px;
+    padding-top: 15px;
+    background-color: #F7F7F7;
+  }
+
+  .business-name{
+    text-align: left;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .business-address{
+    text-align: left;
+    font-size: 12px;
+  }
+
+  .business-snippet p{
+    font-size: 12px;
+    color: gray;
+  }
+
+  .business-state span{
+    padding: 1px 8px;
+    border-radius: 4px;
+    color: white;
+    margin: 2px 0px;
+  }
+
+  .open{
+    background-color: #1abc9c;
+  }
+
+  .close{
+    background-color: #e74c3c;
+  }
+
+  .business-state {
+    text-align: left;
+  }
+
+  .restaurant-list {
+    margin-top: 10px;
+  }
+</style>
+
+<div class="container">
+  <div class="row map-div">
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+  </div>
+
+  <div class ="row restaurant-list">
+    <% @businesses.each do |business| %>
+      <div class = "col-md-6">
+        <div class = "business">
+          <div class = "col-md-3">
+            <%= image_tag business.image_url, :class => "img-thumbnail" %>
+          </div>
+          <div class = "col-md-9">
+
+            <div class = "business-name">
+              <%= business.name %>
+              <%= image_tag business.rating_img_url %>
+            </div>
+
+            <div class = "business-state">
+              <% if business.is_closed %>
+                <span class = "close">Close</span>
+              <% else %>
+                <span class = "open">Open</span>
+              <% end %>
+            </div>
+
+            <div class = "business-snippet">
+              <p class="text-left"><%= business.snippet_text %></p>
+            </div>
+
+            <div class = "business-address">
+              <em><%= "#{business.location.display_address[0]},#{business.location.display_address[1]},#{business.location.display_address[2]}" %></em>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyApNBc6Vy0Ayi38rhGcxm6T8fkh_VoNh9Y&sensor=SET_TO_TRUE_OR_FALSE"></script>
+
+<script type="text/javascript">
+
+  var map;
+  var service;
+
+  function textSearchCallBack(results, status){
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        var place = results[i];
+        createMarkerAndInfoWindow(place.geometry.location,place.name);
+      }
+    }
+  }
+
+  //create marker on the Google Map
+  function createMarkerAndInfoWindow(location,title){
+    var marker = new google.maps.Marker({
+      map: map,
+      position: location,
+      title: title
+    });
+
+    var contentString = title;
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
+  }
+
+  function initialize() {
+
+    var mapOptions = {
+      zoom: 10
+    };
+
+    map = new google.maps.Map(document.getElementById('map_canvas'),
+            mapOptions);
+    service = new google.maps.places.PlacesService(map);
+
+	  // Try HTML5 geolocation
+	  if(navigator.geolocation) {
+	    navigator.geolocation.getCurrentPosition(function(position) {
+        //current user position
+	      var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        //create marker and info window for user position
+	      createMarkerAndInfoWindow(pos,"You are here");
+
+	      map.setCenter(pos);
+
+        <% @businesses.each do |business| %>
+
+          var request = {
+            query: '<%= "#{business.location.display_address[0]} #{business.location.display_address[1]} #{business.location.display_address[2]}" %>'
+          };
+
+          service.textSearch(request, textSearchCallBack);
+        <% end %>
+
+	    }, function() {
+	      handleNoGeolocation(true);
+	    });
+
+	  } else {
+	    // Browser doesn't support Geolocation
+	    handleNoGeolocation(false);
+	  }
+	}
+
+  $(document).ready(function(){
+  	initialize();
+  });
+
+</script>

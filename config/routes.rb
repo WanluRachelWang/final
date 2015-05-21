@@ -51,7 +51,7 @@ Rails.application.routes.draw do
 
   #shows a list of restaurant according to get params
   get '/restaurants' => 'restaurants#index', as: 'restaurants'
-  
+  get '/restaurants/data' => 'restaurants#get_by_geoLocation'
   #no create
 
   #for a single resataurant
