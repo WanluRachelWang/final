@@ -25,11 +25,21 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li class="active">
-	        	<a href=<%= posts_url %>>Posts<span class="sr-only">(current)</span></a>
+	        <li class="<%= @page_id == "posts" ? "active" : "inactive" %>">
+	        	<a href=<%= posts_url %>>
+              Posts
+              <% if @page_id == "posts" %>
+                <span class="sr-only">(current)</span>
+              <% end %>
+            </a>
 	        </li>
-	        <li>
-	        	<a href=<%= restaurants_url %>>Restaurants</a>
+	        <li class="<%= @page_id == "restaurants" ? "active" : "inactive" %>">
+	        	<a href=<%= restaurants_url %>>
+              Restaurants
+              <% if @page_id == "restaurants" %>
+                <span class="sr-only">(current)</span>
+              <% end %>
+            </a>
 	        </li>
 	      </ul>
 	      <form class="navbar-form navbar-left" role="search">

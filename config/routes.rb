@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'users#index'
+  root 'sessions#new'
 
   ##### Sign Up and Sign In and Sign Out
   get "/signup" => 'users#new'

@@ -1,9 +1,16 @@
 class RestaurantsController < ApplicationController
 	
 	before_action :check_configuration
+  before_action :set_page_id
 
+  #set page id for menu tab
+  def set_page_id
+		@page_id = "restaurants"
+	end
+
+	#check if there is already a configuration
+  #otherwise create a configuration
 	def check_configuration
-		#check if there is already a configuration
 		if Yelp.client.configuration == nil 
 
 			Yelp.client.configure do |config|
@@ -12,7 +19,6 @@ class RestaurantsController < ApplicationController
 			  config.token = "Hdr0_0BjpxnItY1LtfNl-MrNEzIZbXvX"
 			  config.token_secret = "AXuqW-YSbjWrLmtgSDdJStG2_G0"
 			end
-		
 		end
 	end
 
