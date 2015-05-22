@@ -23,11 +23,15 @@ class RestaurantsController < ApplicationController
 	end
 
 	def index
+    params = { term: 'food',
+               category_filter: 'pizza'
+    }
 
-		response = Yelp.client.search('Chicago', { term: 'food' })
+    locale = { lang: 'en' }
+
+		response = Yelp.client.search('Chicago', params, locale)
 
 		@businesses = response.businesses
 
-	end
-
+  end
 end

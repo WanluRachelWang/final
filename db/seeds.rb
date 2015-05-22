@@ -15,6 +15,8 @@ Like.delete_all
 Reply.delete_all
 Friend.delete_all
 Follow.delete_all
+Restaurant.delete_all
+Place.delete_all
 
 fakeData = JSON.parse(open('db/fakeData.json').read)
 
@@ -43,16 +45,6 @@ fakeData["users"].each do |user_hash|
 	user.save
 end
 
-
-# Tag
-#   tag_name: string
-
-fakeData["tags"].each do |tag_hash|
-	tag = Tag.new
-	tag.tag_name = tag_hash
-	tag.save
-end
-
 # Post
 #   user_id: integer
 #   post_time: datetime
@@ -70,8 +62,6 @@ fakeData["posts"].each do |post_hash|
 	post.post_text = post_hash["post_text"]
 	post.longitude = post_hash["longitude"]
 	post.latitude = post_hash["latitude"]
-	post.restaurant_id = post_hash["restaurant_id"]
-	post.restaurant_name = post_hash["restaurant_name"]
 	post.rating = post_hash["rating"]
 	post.save
 end
@@ -147,7 +137,65 @@ fakeData["follows"].each do |follow_hash|
 	follow.save
 end
 
-puts "Seed Successfull"
+# Tag
+#   tag_name: string
+
+Yelp.client.configure do |config|
+  config.consumer_key = "qOxoGstzEM4ERC_BQxIltw"
+  config.consumer_secret = "Tk1TpsaLK5aaSLTFgEfSDWhOkMQ"
+  config.token = "Hdr0_0BjpxnItY1LtfNl-MrNEzIZbXvX"
+  config.token_secret = "AXuqW-YSbjWrLmtgSDdJStG2_G0"
+end
+
+categories = JSON.parse(open('db/categories.json').read)
+
+categories.each do |category|
+  if category['parents'][0] == 'restaurants'
+
+    params = { term: category['title']}
+
+    locale = { lang: 'en' }
+
+    response = Yelp.client.search('Chicago', params, locale)
+
+
+    # Restaurant
+    # yelp_id: string
+    # name: string
+    # image_url: string
+    # url: string
+    # phone: string
+    # rating_img_url: string
+    # location_display_address: string
+
+    response.businesses.each do |business|
+      restaurant = Restaurant.new
+      restaurant.yelp_id = business.id
+      restaurant.name = business.name
+
+      if business.has_key?("image_url") &&
+        restaurant.image_url = business.image_url
+      else
+        next
+      end
+
+      restaurant.url = business.url
+
+      if business.has_key?("phone")
+        restaurant.phone = business.phone
+      elsif business.has_key?("display_phone")
+        restaurant.phone = business.display_phone
+      end
+
+      restaurant.rating_img_url = business.rating_img_url
+      restaurant.location_display_address = "#{business.location.display_address[0]},#{business.location.display_address[1]},#{business.location.display_address[2]}"
+      puts business.name
+      restaurant.save
+    end
+  end
+end
+
+puts 'Seed Successfully'
 
 
 
