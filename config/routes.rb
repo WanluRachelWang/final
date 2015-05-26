@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   post '/sessions' => 'sessions#create'
   #########################################################
   # The "Golden 7" for accessing the "posts" resource
-
+  
   get '/posts/new' => 'posts#new', as: 'new_post'
   get '/posts' => 'posts#index', as: 'posts'
-
+  get '/posts/likes/:id' => 'posts#like'
   post '/posts' => 'posts#create'
   
   #no page for single post
@@ -22,9 +22,9 @@ Rails.application.routes.draw do
   #posts can not be re-edit and update
   #get '/posts/:id/edit' => 'posts#edit', as: 'edit_posts'
   #patch '/posts/:id' => 'movies#posts'
-
+  
   delete '/posts/:id' => 'posts#destroy'
-
+  get '/posts/:id/edit' => 'posts#edit'
   #########################################################
   # The "Golden 7" for accessing the "users" resource
 

@@ -107,9 +107,13 @@
             </div>
 
             <div class="panel-footer">
-              <a href="#">Like</a>
-              <%  %>
+              <%= link_to "Like", "/posts/likes/#{post.id}", :method => 'get' %> 
+              
+              <%= Like.where(post_id:post.id).count  %>
+
+              <%= link_to "Edit", "/posts/#{post.id}/edit", :method => 'get' %> 
             </div>
+            
           </div>
         <% end %>
       <% end %>
