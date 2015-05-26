@@ -1,8 +1,27 @@
 class SessionsController < ApplicationController
-	def new
-    @user =User.new
 
-	end
+  #before action for new and create
+  #if user already logged in, redirect to posts page
+
+  before_action :require_no_user, :only => [:new, :create]
+  before_action :require_user, :only => [:delete]
+
+  def require_user
+    if session[:user_id].blank?
+      redirect_to root_url, notice: "You need to log in"
+    end
+  end
+
+  def require_no_user
+    if session[:user_id]
+      redirect_to posts_url
+    end
+  end
+
+  def new
+    @user = User.new
+  end
+
 	def create
 		user = User.find_by(user_name: params[:user_name])
     if user
@@ -20,6 +39,7 @@ class SessionsController < ApplicationController
       @error = "Unknown email."
       redirect_to "/login", notice: "Unknown email."
     end
+
   end
 
   def delete

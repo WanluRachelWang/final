@@ -12,17 +12,28 @@ User
 Tag
   tag_name: string
 
-
-
 Post
   user_id: integer
   post_time: datetime
   post_text: text
   latitude: string
   longitude: string
-  restaurant_id: integer
-  restaurant_name: string
   rating: integer
+
+Restaurant
+  yelp_id: string
+  name: string
+  image_url: string
+  url: string
+  phone: string
+  rating_img_url: string
+  rating: float
+  location_display_address: string
+  snippet_text: string
+
+Place
+  post_id: integer
+  restaurant_id: integer
 
 Picture
   post_id: integer
