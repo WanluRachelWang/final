@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "phone"
     t.string "rating_img_url"
     t.string "location_display_address"
+    t.float  "rating"
   end
 
   add_index "restaurants", ["yelp_id"], name: "index_restaurants_on_yelp_id"

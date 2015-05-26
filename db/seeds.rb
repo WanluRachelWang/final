@@ -188,6 +188,12 @@ categories.each do |category|
       end
 
       restaurant.rating_img_url = business.rating_img_url
+
+      if business.has_key?("snippet_text")
+        restaurant.snippet_text = business.snippet_text
+      end
+
+      restaurant.rating = 0
       restaurant.location_display_address = "#{business.location.display_address[0]},#{business.location.display_address[1]},#{business.location.display_address[2]}"
       puts business.name
       restaurant.save

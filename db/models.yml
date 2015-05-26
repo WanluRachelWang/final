@@ -27,6 +27,7 @@ Restaurant
   url: string
   phone: string
   rating_img_url: string
+  rating: float
   location_display_address: string
 
 Place
