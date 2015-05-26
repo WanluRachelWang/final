@@ -71,11 +71,29 @@
 
 	<!-- body starts -->
 	<div class="placeholder" style="height: 60px"></div>
+
+  <!-- notice-->
+  <% if notice.present? %>
+    <div class="container">
+      <div class="row">
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          <%= notice %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
 	<%= yield %>
 
 	<!-- body ends -->
 
+  <hr/>
 	<!-- footer starts -->
+  <div class="footer container">
+    Contact
+  </div>
 	<!-- footer ends -->
 
 </body>

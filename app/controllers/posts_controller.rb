@@ -31,7 +31,6 @@ class PostsController < ApplicationController
   end
 
   def create
-
     post = Post.new
     post.post_text = params[:post_text]
     post.rating = params[:rating]

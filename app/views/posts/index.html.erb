@@ -38,19 +38,13 @@
     color: gray;
   }
 
+  .yelp-logo{
+    height: 20px;
+    margin-bottom: 6px;
+  }
 </style>
 
 <div class="container">
-
-  <% if notice.present? %>
-    <div class="row">
-      <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        <%= notice %>
-      </div>
-    </div>
-  <% end %>
 
   <!-- If user logged in show inputbox-->
   <% if session["user_id"].present? %>
@@ -214,8 +208,13 @@
             </a>
           </div>
           <div class="media-body">
-            <h4 class="media-heading"><%= restaurant.name %></h4>
+
+            <h4 class="media-heading">
+              <%= link_to restaurant.name, "#"%>
+            </h4>
+
             <%= image_tag restaurant.rating_img_url %>
+            <%= image_tag "http://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/a28962acdb61/assets/img/structural/biz_header_logo.png", :class => "yelp-logo" %>
 
             <% if restaurant.snippet_text.present? %>
               <div class="restaurant-snippet">
