@@ -6,6 +6,10 @@
   .post-pic{
     height: 64px;
   }
+
+  .post-heading{
+    color: darkgray;
+  }
 </style>
 
 <div class="container">
@@ -83,6 +87,7 @@
     <div class="col-md-8">
       <% if @posts %>
         <% @posts.each do |post| %>
+          <% restaurant = post.restaurant %>
           <div class="panel panel-default">
             <div class="panel-body">
               <div class="media">
@@ -92,12 +97,19 @@
                   </a>
                 </div>
                 <div class="media-body">
-                  <h4 class="media-heading">Media heading</h4>
-                  ...
+                  <h6 class="media-heading post-heading">
+                    <%= @user.nick_name %> sent a post on:<%= post.post_time %>
+                  </h6>
+                  <h5 class=""><a href="#"><%= restaurant.name %></a></h5>
+                  <%= post.post_text %>
                 </div>
               </div>
             </div>
-            <div class="panel-footer">Panel footer</div>
+
+            <div class="panel-footer">
+              <a href="#">Like</a>
+              <%  %>
+            </div>
           </div>
         <% end %>
       <% end %>

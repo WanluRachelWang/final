@@ -16,8 +16,8 @@ class PostsController < ApplicationController
 
     else
       @restaurants = Restaurant.all
-      @posts = User.find_by(id:session["user_id"]).posts
-
+      @user = User.find_by(id:session["user_id"])
+      @posts = @user.posts
     end
 
   end
