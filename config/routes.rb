@@ -11,19 +11,18 @@ Rails.application.routes.draw do
   #########################################################
   # The "Golden 7" for accessing the "posts" resource
 
-  get '/posts/new' => 'posts#new', as: 'new_post'
   get '/posts' => 'posts#index', as: 'posts'
 
   post '/posts' => 'posts#create'
-  
-  #no page for single post
-  #get '/posts/:id' => 'posts#show', as: 'post'
-
-  #posts can not be re-edit and update
-  #get '/posts/:id/edit' => 'posts#edit', as: 'edit_posts'
-  #patch '/posts/:id' => 'movies#posts'
 
   delete '/posts/:id' => 'posts#destroy'
+
+  #########################################################
+  # The "Golden 7" for accessing the "replies" resource
+
+  post '/replies' => 'replies#create'
+
+  delete '/replies/:id' => 'replies#destroy'
 
   #########################################################
   # The "Golden 7" for accessing the "users" resource
