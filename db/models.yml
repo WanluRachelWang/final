@@ -29,6 +29,7 @@ Restaurant
   rating_img_url: string
   rating: float
   location_display_address: string
+  snippet_text: string
 
 Place
   post_id: integer

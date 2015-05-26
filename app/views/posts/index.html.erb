@@ -1,15 +1,107 @@
+<style>
+  .media-pic{
+    height: 100px;
+  }
+
+  .post-pic{
+    height: 64px;
+  }
+</style>
+
 <div class="container">
+
+  <% if notice.present? %>
+    <div class="row">
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        <%= notice %>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- If user logged in show inputbox-->
   <% if session["user_id"].present? %>
-    <%= form_tag "/posts" do %>
+    <%= form_tag "/posts", :class => "form-horizontal" do %>
       <div class="row">
         <div class="col-xs-12">
           <div class="panel panel-default">
             <div class="panel-body">
-              <%= text_area_tag 'content', nil, :rows => 3, :class => "form-control", :placeholder => "Your content goes here" %>
+
+              <div class="form-group row">
+                <div class="media col-md-12">
+                  <div class="media-left media-middle">
+                    <a href="#">
+                      <%= image_tag "default-user-image.png", :class => "media-object media-pic img-rounded" %>
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <%= label_tag 'post_text', "Write your feelings about a restaurant", :class => "media-heading"%>
+                    <%= text_area_tag 'post_text', nil, :rows => 3, :class => "form-control", :placeholder => "Your content goes here" %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-2">
+                  <label for="restaurant_id">Choose a restaurant: </label>
+                </div>
+                <div class="col-md-4">
+                  <select name="restaurant_id" class="form-control input-sm">
+                    <% @restaurants.each do |restaurant| %>
+                      <option value="<%= restaurant.id %>">
+                        <%= restaurant.name %>
+                      </option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="col-md-1">
+                  <label for="rating">Rating: </label>
+                </div>
+                <div class="col-md-4">
+                  <select name="rating" class="form-control input-sm">
+                    <option value=5>5</option>
+                    <option value=4>4</option>
+                    <option value=3>3</option>
+                    <option value=2>2</option>
+                    <option value=1>1</option>
+                  </select>
+                </div>
+                <div class="col-md-1">
+                  <button class="btn btn-primary form-control" type="submit">Share</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     <% end %>
   <% end %>
+
+  <div class="row">
+
+    <div class="col-md-8">
+      <% if @posts %>
+        <% @posts.each do |post| %>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <%= image_tag "default-user-image.png", :class => "media-object post-pic img-rounded" %>
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">Media heading</h4>
+                  ...
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer">Panel footer</div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
 </div>

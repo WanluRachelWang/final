@@ -16,12 +16,33 @@ class PostsController < ApplicationController
 
     else
       @restaurants = Restaurant.all
+      @posts = User.find_by(id:session["user_id"]).posts
 
     end
 
   end
 
   def create
+
+    post = Post.new
+    post.post_text = params[:post_text]
+    post.rating = params[:rating]
+    post.post_time = Time.now.to_datetime
+    post.user_id = session[:user_id]
+
+    if post.save
+      place = Place.new
+      place.post_id = post.id
+      place.restaurant_id = params[:restaurant_id]
+
+      if place.save
+        redirect_to posts_url
+        return
+      end
+
+    end
+
+    redirect_to posts_url, notice: "Invalid Post"
 
   end
 

@@ -29,10 +29,11 @@ class UsersController < ApplicationController
 		@user.place = params["nick_name"]
 		@user.last_login_time = Time.now.to_datetime
 		
-		if @user.password==confirmation and @user.save
-			redirect_to users_url
+		if @user.password == confirmation and @user.save
+			session["user_id"] = @user.id
+			redirect_to root_url
 		else 
-			if @user.password!=confirmation
+			if @user.password != confirmation
 				flash[:notice]="password inconsistant."
 				render 'new'
 			else
