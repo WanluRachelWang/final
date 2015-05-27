@@ -58,8 +58,6 @@ class UsersController < ApplicationController
 			redirect_to users_url, notice: "User not found."
 		end
 
-    
-
 	end
 
 	def edit
@@ -76,6 +74,7 @@ class UsersController < ApplicationController
 		@user.save
 		redirect_to users_url
 	end
+
 	def follow
     follow = Follow.new
     follow.follower_id = params["id"]

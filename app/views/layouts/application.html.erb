@@ -60,7 +60,7 @@
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
           <% if session["user_id"].present? %>
-            <li><%= link_to "Hi," + User.find_by(id: session["user_id"]).nick_name, '#' %></li>
+            <li><%= link_to "Hi," + User.find_by(id: session["user_id"]).nick_name, user_url(session[:user_id]) %></li>
             <li><%= link_to "Sign Out", '/logout' %></li>
           <% else %>
             <li><%= link_to "Sign In", '/login' %></li>
