@@ -52,13 +52,7 @@ class PostsController < ApplicationController
     redirect_to posts_url, notice: "Invalid Post"
   end
 
-  def like
-    like = Like.new
-    like.post_id = params["id"]
-    like.user_id = session["user_id"]
-    like.save
-    redirect_to posts_url
-  end
+  
 
 
 
@@ -84,6 +78,4 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-  end
 end

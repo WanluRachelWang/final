@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
 
   get '/posts' => 'posts#index', as: 'posts'
-  get '/posts/likes/:id' => 'posts#like'
+  
   post '/posts' => 'posts#create'
   
   #no page for single post
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
 
   delete '/posts/:id' => 'posts#destroy'
-  get '/posts/:id/edit' => 'posts#edit'
+  
   #########################################################
   # The "Golden 7" for accessing the "replies" resource
 
