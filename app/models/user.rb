@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   has_many :followeeships, class_name: 'Follow', foreign_key: 'follower_id'
   has_many :followees, class_name: 'User', :through=> :followeeships, :source=>'followee'
-
+ 
   #validations
   validates :user_name, presence:true, uniqueness: true
   validates_format_of :user_name, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
