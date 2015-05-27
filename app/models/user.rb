@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   #validations
   validates :user_name, presence:true, uniqueness: true
-  validates_format_of :user_name, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
+  validates_format_of :user_name, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   validates :password, :gender, :id_created_time, :last_login_time, :nick_name, presence: true
   validates :nick_name, uniqueness: true
