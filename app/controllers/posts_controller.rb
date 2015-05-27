@@ -18,20 +18,22 @@ class PostsController < ApplicationController
     #if user has logged in, read user's posts and user's friends posts
     #if not, read recommend posts
 
+    @restaurants = Restaurant.all
+
     if session[:user_id].blank?
+      #if not logged in, read most recently 20 posts
+      @posts = Post.order("id desc").limit(20)
 
     else
-      @restaurants = Restaurant.all
       @user = User.find_by(id:session["user_id"])
 
-      #get first 10 posts
+      #get first 20 posts
       @posts = @user.posts.order("post_time desc").limit(20)
     end
 
   end
 
   def create
-
     post = Post.new
     post.post_text = params[:post_text]
     post.rating = params[:rating]
@@ -50,11 +52,8 @@ class PostsController < ApplicationController
     end
 
     redirect_to posts_url, notice: "Invalid Post"
+
   end
-
-  
-
-
 
   def destroy
 
@@ -76,6 +75,7 @@ class PostsController < ApplicationController
     else
       redirect_to posts_url, notice: "Post delete failure"
     end
+
   end
 
 end

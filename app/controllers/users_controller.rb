@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 		@user.password = Digest::MD5.hexdigest(Digest::MD5.hexdigest(params["password"])+Digest::MD5.hexdigest(@user.salt))
 		confirmation=Digest::MD5.hexdigest(Digest::MD5.hexdigest(params["repassword"])+Digest::MD5.hexdigest(@user.salt))
 		@user.profile_pic_path = params["profile_pic_path"]
-		@user.gender = params["gender"]
+		@user.gender = params["gender"] == "1"
 		@user.id_created_time = Time.now.to_datetime
 		@user.nick_name = params["nick_name"]
 		@user.place = params["nick_name"]
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
 		@user.user_name = params["user_name"]
 		@user.password = params["password"]
 		@user.salt = params["salt"]
-		@user.profile_pic_path = params["profile_pic_path"]
+		@user.profile_pic_path = params["profile_pic_path"].present? ? "default-user-image.png" : params["profile_pic_path"]
 		@user.nick_name = params["nick_name"]
 		@user.last_login_time = Time.now.to_datetime
 		@user.save

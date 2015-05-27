@@ -23,15 +23,65 @@ class RestaurantsController < ApplicationController
 	end
 
 	def index
-    params = { term: 'food',
-               category_filter: 'pizza'
-    }
+    # params = { term: 'food',
+     #           category_filter: 'pizza'
+    # }
+    #
+    # locale = { lang: 'en' }
+    #
+		# response = Yelp.client.search('Chicago', params, locale)
+    #
+		# @businesses = response.businesses
 
-    locale = { lang: 'en' }
+    page_count = 30
 
-		response = Yelp.client.search('Chicago', params, locale)
+    count = Restaurant.count
+    @page = []
 
-		@businesses = response.businesses
+    if params[:offset] && params[:offset].to_i > 0
+
+      offset = params[:offset].to_i
+
+      @restaurants = Restaurant.order("rating desc").limit(page_count).offset(offset)
+
+      # pagination
+      @page.push(offset - page_count)
+
+      if offset + page_count < count
+        @page.push(offset + page_count)
+      else
+        @page.push(-1)
+      end
+
+
+    else
+      @restaurants = Restaurant.order("rating desc").limit(page_count)
+
+      # pagination
+      @page.push(-1)
+
+      if page_count < count
+        @page.push(page_count)
+      else
+        @page.push(-1)
+      end
+
+    end
+
+  end
+
+  def show
+
+    restaurant = Restaurant.find_by(id:params[:id])
+
+    if restaurant
+
+      @business = Yelp.client.business(restaurant.yelp_id)
+      @posts = restaurant.posts.order("id desc")
+
+    else
+      redirect_to restaurants_path, notice: "No restaurant record!"
+    end
 
   end
 end
