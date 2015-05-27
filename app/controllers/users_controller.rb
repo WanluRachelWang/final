@@ -70,7 +70,7 @@ class UsersController < ApplicationController
 		@user.user_name = params["user_name"]
 		@user.password = params["password"]
 		@user.salt = params["salt"]
-		@user.profile_pic_path = params["profile_pic_path"].present? ? "default-user-image.png" : params["profile_pic_path"]
+		@user.profile_pic_path = params["profile_pic_path"].present? ? params["profile_pic_path"] : "default-user-image.png"
 		@user.nick_name = params["nick_name"]
 		@user.last_login_time = Time.now.to_datetime
 		@user.save
