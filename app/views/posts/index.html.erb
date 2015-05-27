@@ -15,6 +15,11 @@
     height: 30px;
   }
 
+  .reply-footer{
+    font-size: 15px;
+    color: darkgray;
+  }
+
   .restaurant-name{
     text-align: left;
     font-weight: bold;
@@ -94,7 +99,7 @@
                   </select>
                 </div>
                 <div class="col-md-1">
-                  <button class="btn btn-primary form-control" type="submit">Share</button>
+                  <button class="btn btn-primary" type="submit">Share</button>
                 </div>
               </div>
             </div>
@@ -120,13 +125,13 @@
                   </a>
                 </div>
                 <div class="media-body">
-                  <h6 class="media-heading post-heading">
-                    <%= @user.nick_name %> sent a post on:<%= post.post_time %>
+                  <h7 class="media-heading post-heading">
+                    <%= post.user.nick_name %> sent a post on:<%= post.post_time %>
                     <% if @user && @user.id == post.user_id  %>
                       (<%= link_to "Delete", "/posts/#{post.id}", :method => 'delete' %>)
                     <% end %>
-                  </h6>
-                  <h5 class="">
+                  </h7>
+                  <div class="">
                     <!-- restaurant name-->
                     <a href="#"><%= restaurant.name %></a>
 
@@ -139,7 +144,7 @@
                       &#9734;
                     <% end %>
 
-                  </h5>
+                  </div>
                   <%= post.post_text %>
                 </div>
               </div>
@@ -163,15 +168,18 @@
                       </a>
                     </div>
                     <div class="media-body">
-                      <%= link_to "@#{reply.user.nick_name}:", "#" %><%= reply.content %>
-                      <h6 class="media-heading post-heading">
-                        Replied on: <%= reply.time %>
 
+                      <!-- reply content-->
+                      <%= link_to "@#{reply.user.nick_name}:", "#" %><%= reply.content %>
+
+                      <!-- reply footer-->
+                      <div class="media-heading reply-footer">
+                        Replied on: <%= reply.time %>
                         <% if @user && @user.id == reply.user_id  %>
                           (<%= link_to "Delete", "/replies/#{reply.id}", :method => 'delete' %>)
                         <% end %>
+                      </div>
 
-                      </h6>
                     </div>
                   </li>
                 <% end %>
