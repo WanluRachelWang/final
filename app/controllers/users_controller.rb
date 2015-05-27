@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
 
-	before_action :find_user, :only => [:show, :edit, :update, :destroy]
-
+	before_action :find_user,  :only => [:show, :edit, :update, :destroy]
+	#before_action :authorize,	:only => [:personal_show]
+	def authorize
+		@user = User.find_by(id: params[:id])
+    if @user.blank? || session[:user_id] != @user.id
+      redirect_to root_url, notice: "Nice try!"
+    end
+	end
 	def find_user
 		@user = User.find_by(id: params["id"])
 	end
@@ -51,6 +57,9 @@ class UsersController < ApplicationController
 		if @user == nil
 			redirect_to users_url, notice: "User not found."
 		end
+
+    
+
 	end
 
 	def edit
@@ -67,6 +76,12 @@ class UsersController < ApplicationController
 		@user.save
 		redirect_to users_url
 	end
-
+	def follow
+    follow = Follow.new
+    follow.follower_id = params["id"]
+    follow.user_id = session["user_id"]
+    follow.save
+    redirect_to user_url(params["id"])
+  end
 
 end

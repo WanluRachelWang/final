@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   # The "Golden 7" for accessing the "posts" resource
   
   get '/posts/new' => 'posts#new', as: 'new_post'
+
+
+
   get '/posts' => 'posts#index', as: 'posts'
   get '/posts/likes/:id' => 'posts#like'
   post '/posts' => 'posts#create'
@@ -23,8 +26,18 @@ Rails.application.routes.draw do
   #get '/posts/:id/edit' => 'posts#edit', as: 'edit_posts'
   #patch '/posts/:id' => 'movies#posts'
   
+
+
+
   delete '/posts/:id' => 'posts#destroy'
   get '/posts/:id/edit' => 'posts#edit'
+  #########################################################
+  # The "Golden 7" for accessing the "replies" resource
+
+  post '/replies' => 'replies#create'
+
+  delete '/replies/:id' => 'replies#destroy'
+
   #########################################################
   # The "Golden 7" for accessing the "users" resource
 
@@ -32,10 +45,10 @@ Rails.application.routes.draw do
 
   #no users page, there is only page for single user
   get '/users' => 'users#index'#, as: 'users'
-  
+  #get '/users/show' =>'user#show'
   #for register
   #post '/users' => 'users#create'
-
+  get '/users/follows/:id' => 'users#follow', as: 'follow'
   #index page for a single user
   get '/users/:id' => 'users#show', as: 'user'
 

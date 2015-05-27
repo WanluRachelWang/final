@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
 
-  before_action :require_user, :only => [:create, :delete]
+  before_action :require_user, :only => [:create, :destroy]
+  before_action :set_page_id
+
+  #set page id for menu tab
+  def set_page_id
+    @page_id = "posts"
+  end
 
   def require_user
     if session[:user_id].blank?
@@ -17,7 +23,9 @@ class PostsController < ApplicationController
     else
       @restaurants = Restaurant.all
       @user = User.find_by(id:session["user_id"])
-      @posts = @user.posts
+
+      #get first 10 posts
+      @posts = @user.posts.order("post_time desc").limit(20)
     end
 
   end
@@ -39,12 +47,11 @@ class PostsController < ApplicationController
         redirect_to posts_url
         return
       end
-
     end
 
     redirect_to posts_url, notice: "Invalid Post"
-
   end
+
   def like
     like = Like.new
     like.post_id = params["id"]
@@ -52,9 +59,31 @@ class PostsController < ApplicationController
     like.save
     redirect_to posts_url
   end
-  def delete
 
+
+
+  def destroy
+
+    #only can delete user's own replies
+
+    post = Post.find_by(id:params[:id])
+
+    if post && post.user_id == session[:user_id]
+
+      # delete all replies
+
+      post.replies.each do |reply|
+        reply.delete
+      end
+
+      post.delete
+
+      redirect_to posts_url
+    else
+      redirect_to posts_url, notice: "Post delete failure"
+    end
   end
+
   def edit
   end
 end
