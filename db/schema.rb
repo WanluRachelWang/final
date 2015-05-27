@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "url"
     t.string "phone"
     t.string "rating_img_url"
-    t.string "location_display_address"
     t.float  "rating"
+    t.string "location_display_address"
     t.string "snippet_text"
   end
 
