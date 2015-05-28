@@ -36,15 +36,29 @@
 
 <% if session[:user_id] == @user.id %>
 	<p><%= link_to "Edit", edit_user_url(@user.id) %></p>
+  <%= form_tag user_url(session[:user_id]) , :method => "patch" do %>
+
+  
+    <%= label_tag :Tag_Me %>
+    <%= text_field_tag :tag %>
+  
+
+  <input type="submit" name="commit" value="Tag">
+
+  <% end %>
 <% end %>
+Tags:
+  <% if @user.tags %>
+    <% @user.tags.each do |tag| %>
+      <%= tag.tag_name %>
+    <% end %>
+  <% end %>
+
 <p><%= link_to "Friends #{@user.friendships.count}", "#" %></p>
 <p><%= link_to "Follower #{@user.followeeships.count}", "#" %></p>
 <p><%= link_to "Follow #{@user.followships.count}", "#" %></p>
-<% if @user.tags %>
-  <% @user.tags.each do |tag| %>
-    <%= tag %>
-  <% end %>
-<% end %>
+
+
 <div class="row">
 
     <!-- Posts and replies-->

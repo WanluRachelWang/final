@@ -74,7 +74,18 @@ class UsersController < ApplicationController
 		@user.nick_name = params["nick_name"]
 		@user.last_login_time = Time.now.to_datetime
 		@user.save
-		redirect_to users_url
+		if params['tag'].blank?
+			
+		else
+			tag=Tag.find_by(:tag_name => params['tag'])
+			if not tag.nil?
+				mark = Mark.new
+				mark.user_id=@user.id
+				mark.tag_id=tag.id
+				mark.save
+			end
+		end
+		redirect_to user_url(@user.id)
 	end
 	def follow
     follow = Follow.new
