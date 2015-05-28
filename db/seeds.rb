@@ -120,6 +120,11 @@ categories = JSON.parse(open('db/categories.json').read)
 categories.each do |category|
   if category['parents'][0] == 'restaurants'
 
+    # save tag
+    tag = Tag.new
+    tag.tag_name = category['title']
+    tag.save
+
     params = { term: category['title']}
 
     locale = { lang: 'en' }
@@ -165,6 +170,7 @@ categories.each do |category|
       restaurant.location_display_address = "#{business.location.display_address[0]},#{business.location.display_address[1]},#{business.location.display_address[2]}"
       puts business.name
       restaurant.save
+
     end
   end
 end

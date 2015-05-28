@@ -62,6 +62,9 @@ Rails.application.routes.draw do
   #for a single resataurant
   get '/restaurants/:id' => 'restaurants#show', as: 'restaurant'
 
+  #search restaurants
+  get '/restaurants/search' =>  'restaurants#search', as: 'restaurants_search'
+
   #no edit,update and destroy
 
 end

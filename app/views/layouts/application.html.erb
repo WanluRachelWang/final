@@ -3,10 +3,9 @@
 <head>
   <title>Final</title>
   <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" %>
-
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
@@ -60,7 +59,7 @@
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
           <% if session["user_id"].present? %>
-            <li><%= link_to "Hi," + User.find_by(id: session["user_id"]).nick_name,  user_url(session["user_id"]) %></li>
+            <li><%= link_to "Hi," + User.find_by(id: session["user_id"]).nick_name, user_url(session[:user_id]) %></li>
             <li><%= link_to "Sign Out", '/logout' %></li>
           <% else %>
             <li><%= link_to "Sign In", '/login' %></li>

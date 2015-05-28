@@ -47,6 +47,10 @@
     height: 20px;
     margin-bottom: 6px;
   }
+
+  #restaurants-container{
+    margin-top: 20px;
+  }
 </style>
 
 <div class="container">
@@ -209,36 +213,45 @@
     <!-- restaurants-->
     <div class="col-md-4">
 
-      <% @restaurants.shuffle.first(20).each do |restaurant| %>
+      <div class="input-group">
+        <input class="form-control" id="restaurant-search" type="search" placeholder="Search">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Go</button>
+        </span>
+      </div>
 
-        <div class="media well">
-          <div class="media-left">
-            <a href="#">
-              <%= image_tag restaurant.image_url, :class => "media-object restaurant-img" %>
-            </a>
-          </div>
-          <div class="media-body">
+      <div id="restaurants-container">
+        <% @restaurants.shuffle.first(20).each do |restaurant| %>
 
-            <h4 class="media-heading">
-              <%= link_to restaurant.name, "#"%>
-            </h4>
+          <div class="media well">
+            <div class="media-left">
+              <a href="#">
+                <%= image_tag restaurant.image_url, :class => "media-object restaurant-img" %>
+              </a>
+            </div>
+            <div class="media-body">
 
-            <%= image_tag restaurant.rating_img_url %>
-            <%= image_tag "http://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/a28962acdb61/assets/img/structural/biz_header_logo.png", :class => "yelp-logo" %>
+              <h4 class="media-heading">
+                <%= link_to restaurant.name, "#"%>
+              </h4>
 
-            <% if restaurant.snippet_text.present? %>
-              <div class="restaurant-snippet">
-                <%= restaurant.snippet_text %>
+              <%= image_tag restaurant.rating_img_url %>
+              <%= image_tag "http://s3-media2.fl.yelpcdn.com/assets/srv0/yelp_styleguide/a28962acdb61/assets/img/structural/biz_header_logo.png", :class => "yelp-logo" %>
+
+              <% if restaurant.snippet_text.present? %>
+                <div class="restaurant-snippet">
+                  <%= restaurant.snippet_text %>
+                </div>
+              <% end %>
+
+              <div class="restaurant-address">
+                <em><%= restaurant.location_display_address %></em>
               </div>
-            <% end %>
-
-            <div class="restaurant-address">
-              <em><%= restaurant.location_display_address %></em>
             </div>
           </div>
-        </div>
 
-      <% end %>
+        <% end %>
+      </div>
 
     </div>
   </div>
