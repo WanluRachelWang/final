@@ -1,7 +1,6 @@
 User
   user_name: string
-  password: string
-  salt: string
+  password_digest: string
   profile_pic_path: string
   gender: boolean
   id_created_time: datetime

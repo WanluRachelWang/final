@@ -7,13 +7,15 @@
 
   <div>
     <%= label_tag :password %>
-    <%= text_field_tag :password, @user.password %>
+    <%= text_field_tag :password, nil %>
   </div>
 
   <div>
-    <%= label_tag :salt %>
-    <%= text_field_tag :salt, @user.salt %>
-  </div>
+          <div>
+            <%= label_tag 'repassword', "Confirm Password"%>
+            <%= password_field_tag 'repassword', nil%>
+          </div>
+        </div>
 
   <div>
     <%= label_tag :profile_pic_path %>

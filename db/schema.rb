@@ -101,14 +101,13 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "users", force: :cascade do |t|
     t.string   "user_name"
-    t.string   "password"
-    t.string   "salt"
     t.string   "profile_pic_path"
     t.boolean  "gender",           default: false
     t.datetime "id_created_time"
     t.string   "nick_name"
     t.string   "place"
     t.datetime "last_login_time"
+    t.string   "password_digest"
   end
 
 end
