@@ -47,3 +47,4 @@ gem 'ez'
 gem 'quiet_assets'
 
 gem 'yelp', require: 'yelp'
+gem 'bcrypt-ruby'

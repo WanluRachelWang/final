@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     #if not, read recommend posts
 
     @restaurants = Restaurant.all
-
+    
     if session[:user_id].blank?
       #if not logged in, read most recently 20 posts
       @posts = Post.order("id desc").limit(20)
