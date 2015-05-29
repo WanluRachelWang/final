@@ -66,5 +66,16 @@ Rails.application.routes.draw do
   get '/restaurants/search' =>  'restaurants#search', as: 'restaurants_search'
 
   #no edit,update and destroy
+  #########################################################
+  # The "Golden 7" for accessing the "follow" resource
 
+  patch '/follow/:id' => 'follow#create', as: 'new_follow'
+  delete '/follow/:id' => 'follow#destroy'
+  get '/follow/:id/followers' => 'follow#follower_index', as: 'follower_index'
+  get '/follow/:id/followees' => 'follow#followee_index', as: 'followee_index'
+  get '/follow/:id/follow_index' => 'follow#index', as: 'index'
+  #########################################################
+  # The "Golden 7" for accessing the "tags" resource
+  get '/tags/new' => 'tags#create'
+  delete 'tags/:id' => 'tags#delete'
 end

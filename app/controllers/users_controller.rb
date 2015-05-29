@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 		@user.user_name = params["user_name"]
 		@user.password = params["password"]
 		confirmation=params["repassword"]
-		@user.profile_pic_path = params["profile_pic_path"]
+		@user.profile_pic_path = params["profile_pic_path"].present? ? params["profile_pic_path"] : "default-user-image.png"
 		@user.gender = params["gender"] == "1"
 		@user.id_created_time = Time.now.to_datetime
 		@user.nick_name = params["nick_name"]
@@ -53,6 +53,9 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		if @user !=nil
+			@follow = Follow.find_by_user_id_and_follower_id(session[:user_id],params[:id])
+		end
 		if @user == nil
 			redirect_to users_url, notice: "User not found."
 		end
