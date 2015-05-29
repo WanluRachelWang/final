@@ -108,26 +108,34 @@
         <% end %>
       </div>
 
-      Tags:
+      <!-- tags area-->
+      <!-- if user logged in, show edit tag-->
+      <!-- if not, show tags-->
       <% if session[:user_id] == @user.id %>
         <%= form_tag user_url(session[:user_id]) , :method => "patch" do %>
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search tags" id="search-tag">
-            <span class="input-group-btn">
-              <button type="submit" class="btn"><span class="fui-search"></span></button>
-            </span>
+          Tags:<button type="submit" class="btn btn-sm btn-info" style="margin-left:5px;">Submit</button>
+          <div style="margin-top: 10px;">
+            <select name="tags" multiple="multiple" class="form-control multiselect multiselect-info">
+              <% @tags.each do |tag| %>
+                <% if @user_tags.include? tag.tag_name %>
+                  <option value="<%= tag.id %>"  selected><%= tag.tag_name %></option>
+                <% else %>
+                  <option value="<%= tag.id %>"><%= tag.tag_name %></option>
+                <% end %>
+              <% end %>
+            </select>
           </div>
         <% end %>
-      <% end %>
-
-      <div class="col-md-12 tag-div">
-        <% if @user.tags %>
-          <% @user.tags.each do |tag| %>
-            <button class="btn btn-info tag-item"><%= tag.tag_name %></button>
+      <% else %>
+        Tags:
+        <div class="col-md-12 tag-div">
+          <% if @user.tags %>
+            <% @user.tags.each do |tag| %>
+              <button class="btn btn-info tag-item"><%= tag.tag_name %></button>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-
+        </div>
+      <% end %>
     </div>
 
     <!-- Posts and replies-->
@@ -215,3 +223,6 @@
 
 </div>
 
+<script>
+  $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+</script>

@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 	end
 	
 	def create
+
 		@user = User.new
 		@user.user_name = params["user_name"]
 		@user.salt = ('0'..'z').to_a.shuffle.first(14).join
@@ -58,6 +59,11 @@ class UsersController < ApplicationController
 			redirect_to users_url, notice: "User not found."
 		end
 
+    if @user.id == session[:user_id]
+      @tags = Tag.all
+      @user_tags = @user.tags.pluck("tag_name")
+    end
+
 	end
 
 	def edit
@@ -65,6 +71,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
+
 		@user.user_name = params["user_name"]
 		@user.password = params["password"]
 		@user.salt = params["salt"]
