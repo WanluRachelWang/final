@@ -63,7 +63,7 @@ class PostsController < ApplicationController
 
     if post && post.user_id == session[:user_id]
 
-      post.delete
+      post.destroy
 
       redirect_to posts_url
     else

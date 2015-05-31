@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   #get '/users/new' => 'users#new', as: 'new_user'
 
   #no users page, there is only page for single user
-  get '/users' => 'users#index'#, as: 'users'
+  get '/users' => 'users#index'
   #get '/users/show' =>'user#show'
   #for register
   #post '/users' => 'users#create'
@@ -76,6 +76,5 @@ Rails.application.routes.draw do
   get '/follow/:id/follow_index' => 'follow#index', as: 'index'
   #########################################################
   # The "Golden 7" for accessing the "tags" resource
-  get '/tags/new' => 'tags#create'
-  delete 'tags/:id' => 'tags#delete'
+  patch '/tags' => 'tags#update'
 end

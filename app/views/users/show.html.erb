@@ -114,10 +114,10 @@
       <!-- if user logged in, show edit tag-->
       <!-- if not, show tags-->
       <% if session[:user_id] == @user.id %>
-        <%= form_tag user_url(session[:user_id]) , :method => "patch" do %>
-          Tags:<button type="submit" class="btn btn-sm btn-info" style="margin-left:5px;">Submit</button>
+        <%= form_tag "/tags" , :method => "patch" do %>
+          Tags:<button type="submit" class="btn btn-sm btn-info" style="margin-left:5px;">Update Tags</button>
           <div style="margin-top: 10px;">
-            <select name="tags" multiple="multiple" class="form-control multiselect multiselect-info">
+            <select name="tags[]" multiple="multiple" class="form-control multiselect multiselect-info">
               <% @tags.each do |tag| %>
                 <% if @user_tags.include? tag.tag_name %>
                   <option value="<%= tag.id %>"  selected><%= tag.tag_name %></option>

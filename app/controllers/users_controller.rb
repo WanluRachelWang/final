@@ -1,19 +1,20 @@
 class UsersController < ApplicationController
 
 	before_action :find_user,  :only => [:show, :edit, :update, :destroy]
-	#before_action :authorize,	:only => [:personal_show]
-	def authorize
-		@user = User.find_by(id: params[:id])
-    if @user.blank? || session[:user_id] != @user.id
-      redirect_to root_url, notice: "Nice try!"
-    end
-	end
+
 	def find_user
 		@user = User.find_by(id: params["id"])
 	end
 
 	def index
-		@users = User.all
+
+    if params["keyword"].present?
+      @keyword = params[:keyword]
+      @users = User.where("nick_name LIKE ?", "%#{@keyword}%")
+    else
+      @users = User.all
+    end
+
 	end
 
 	def new
@@ -80,17 +81,7 @@ class UsersController < ApplicationController
 		@user.nick_name = params["nick_name"]
 		@user.last_login_time = Time.now.to_datetime
 		@user.save
-		if params['tag'].blank?
-			
-		else
-			tag=Tag.find_by(:tag_name => params['tag'])
-			if not tag.nil?
-				mark = Mark.new
-				mark.user_id=@user.id
-				mark.tag_id=tag.id
-				mark.save
-			end
-		end
+
 		redirect_to user_url(@user.id)
 	end
 
