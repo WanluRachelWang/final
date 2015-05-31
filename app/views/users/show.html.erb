@@ -131,10 +131,12 @@
       <% else %>
         Tags:
         <div class="col-md-12 tag-div">
-          <% if @user.tags %>
+          <% if @user.tags.count > 0 %>
             <% @user.tags.each do |tag| %>
               <button class="btn btn-info tag-item"><%= tag.tag_name %></button>
             <% end %>
+          <% else %>
+            No tags yet
           <% end %>
         </div>
       <% end %>

@@ -6,16 +6,17 @@ class FollowController < ApplicationController
     if session[:user_id].blank?
       redirect_to root_url, notice: "You need to log in"
     end
+
+    @user = User.find_by(:id => params[:id])
+		@follow = Follow.find_by_user_id_and_follower_id(session[:user_id],params[:id])
   end
 
 	def followee_index
-		@user = User.find_by(:id => params[:id])
 		@follow_users = @user.followees
 		render 'followee'
 	end
 
 	def follower_index
-		@user = User.find_by(:id => params[:id])
 		@follow_users = @user.followers
 		render 'follower'
 	end

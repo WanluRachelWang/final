@@ -3,9 +3,9 @@
     height: 100px;
   }
 
-  .post-pic{
-    height: 64px;
-    width: 64px;
+  .follow-pic{
+    height: 80px;
+    width: 80px;
   }
 
   .post-heading{
@@ -103,12 +103,47 @@
             </li>
           <% end %>
         <% end %>
+
         <% if session[:user_id] == @user.id %>
           <li class="list-group-item">
             <%= link_to "Edit", edit_user_url(@user.id)%>
           </li>
         <% end %>
       </div>
+    </div>
+
+    <!-- followers-->
+    <div class="col-md-8">
+
+      <% @follow_users.each do |user| %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="media">
+              <div class="media-left media-middle">
+                <a href=<%= user_url(user.id) %>>
+                  <%= image_tag user.profile_pic_path, :class => "media-object follow-pic img-rounded" %>
+                </a>
+              </div>
+              <div class="media-body">
+                <h5 class="media-heading">
+                  <%= link_to user.nick_name, user_url(user.id) %>
+                </h5>
+
+                <div>
+                  <%= user.posts.count %> Posts
+                </div>
+
+                <div>
+                  <% user.tags.each do |tag| %>
+                    <span class="label label-primary"><%= tag.tag_name %></span>
+                  <% end %>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
 
   </div>
