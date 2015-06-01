@@ -74,15 +74,35 @@ class UsersController < ApplicationController
 	end
 
 	def update
-
+		
 		@user.user_name = params["user_name"]
-		@user.password = params["password"]
+		
+		new_password=params["new_password"]
+		
+		repassword = params["repassword"]
 		@user.profile_pic_path = params["profile_pic_path"].present? ? params["profile_pic_path"] : "default-user-image.png"
 		@user.nick_name = params["nick_name"]
 		@user.last_login_time = Time.now.to_datetime
-		@user.save
+		
+		
 
-		redirect_to user_url(@user.id)
+		if @user.authenticate(params["password"])
+			@user.password=params["password"]
+			
+		else
+			flash[:notice]="Fail to update. Please guarantee your input password is correct."
+		end
+		if new_password.nil?
+			@user.password = params["password"]
+		else
+			if new_password!=repassword
+				flash[:notice]="Your input passwords are not consistant. "
+			else
+				@user.password = params["new_password"]
+			end
+		end	
+		@user.save
+		redirect_to user_url(params["id"])
 	end
 
 	def follow
