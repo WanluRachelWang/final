@@ -63,13 +63,7 @@ class PostsController < ApplicationController
 
     if post && post.user_id == session[:user_id]
 
-      # delete all replies
-
-      post.replies.each do |reply|
-        reply.delete
-      end
-
-      post.delete
+      post.destroy
 
       redirect_to posts_url
     else

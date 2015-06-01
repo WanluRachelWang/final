@@ -10,10 +10,10 @@ class RepliesController < ApplicationController
 
   def create
 
-    reply = Reply.new
+    verified = params.permit(:post_id, :content)
+
+    reply = Reply.new(verified)
     reply.user_id = session[:user_id]
-    reply.post_id = params[:post_id]
-    reply.content = params[:content]
     reply.time = Time.now.to_datetime
 
     if reply.save
