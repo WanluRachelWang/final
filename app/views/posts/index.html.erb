@@ -215,12 +215,7 @@
     <!-- restaurants-->
     <div class="col-md-4">
 
-      <div class="input-group">
-        <input class="form-control" id="restaurant-search" type="search" placeholder="Search Restaurants">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="submit">Go</button>
-        </span>
-      </div>
+      <h5>Recommend Restaurants</h5>
 
       <div id="restaurants-container">
         <% @restaurants.shuffle.first(20).each do |restaurant| %>
