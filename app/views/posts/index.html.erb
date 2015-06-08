@@ -139,7 +139,7 @@
                   </h7>
                   <div class="">
                     <!-- restaurant name-->
-                    <a href="#"><%= restaurant.name %></a>
+                    <%= link_to restaurant.name, restaurant_url(restaurant.id) %>
 
                     <!-- rating-->
                     <% post.rating.times do %>
@@ -170,14 +170,14 @@
                   <% post.replies.each do |reply| %>
                     <li class="media">
                       <div class="media-left">
-                        <a href="#">
-                          <%= image_tag "default-user-image.png", :class => "media-object reply-pic img-rounded" %>
+                        <a href="<%= user_url(reply.user.id) %>">
+                          <%= image_tag reply.user.profile_pic_path, :class => "media-object reply-pic img-rounded" %>
                         </a>
                       </div>
                       <div class="media-body">
 
                         <!-- reply content-->
-                        <%= link_to "@#{reply.user.nick_name}:", "#" %><%= reply.content %>
+                        <%= link_to "@#{reply.user.nick_name}:", user_url(reply.user.id) %><%= reply.content %>
 
                         <!-- reply footer-->
                         <div class="media-heading reply-footer">
@@ -222,14 +222,14 @@
 
           <div class="media well">
             <div class="media-left">
-              <a href="#">
+              <a href="<%= restaurant_url(restaurant.id) %>">
                 <%= image_tag restaurant.image_url, :class => "media-object restaurant-img" %>
               </a>
             </div>
             <div class="media-body">
 
               <h4 class="media-heading">
-                <%= link_to restaurant.name, "#"%>
+                <%= link_to restaurant.name, restaurant_url(restaurant.id)%>
               </h4>
 
               <%= image_tag restaurant.rating_img_url %>
