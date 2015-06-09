@@ -75,8 +75,43 @@
   </div>
 
   <div class="row">
-        <div class="col-md-4 col-lg-offset-4">
-         <%= form_tag user_url(@user.id), :method => "patch" do %>
+    <!-- tags-->
+    <div class="col-md-4">
+      <div class="list-group">
+        <li class="list-group-item">
+          <%= link_to "Home", user_url(@user.id)%>
+        </li>
+
+        <li class="list-group-item">
+          <span class="badge"><%= @user.followeeships.count %></span>
+          <%= link_to "Follower", follower_index_url(@user.id) %>
+        </li>
+        <li class="list-group-item">
+          <span class="badge"><%= @user.followships.count %></span>
+          <%= link_to "Follow", followee_index_url(@user.id) %>
+        </li>
+
+        <% if session[:user_id] != @user.id %>
+          <% if @follow.nil? %>
+            <li class="list-group-item">
+              <%= link_to "Follow this user", new_follow_url(@user.id),:method => "patch" %>
+            </li>
+          <% else %>
+            <li class="list-group-item">
+              <%= link_to "Unfollow", new_follow_url(@user.id),:method => "delete" %>
+            </li>
+          <% end %>
+        <% end %>
+        <% if session[:user_id] == @user.id %>
+          <li class="list-group-item active">
+            <%= link_to "Edit", edit_user_url(@user.id)%>
+          </li>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <%= form_tag user_url(@user.id), :method => "patch" do %>
         <div class="form-group">
           <div class="input-group input-group-lg">
             <%= label_tag 'user_name', "Username", :class => "input-group-addon" %>
@@ -86,23 +121,24 @@
 
         <div class="form-group">
           <div class="input-group input-group-lg">
-            <%= label_tag 'password', "Password", :class => "input-group-addon" %>
-            <%= password_field_tag 'password',  nil, placeholder: 'Example: password',:class => "form-control"%>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group input-group-lg">
             <%= label_tag 'profile_pic_path', "profile_pic_path", :class => "input-group-addon" %>
             <%= text_field_tag 'profile_pic_path', @user.profile_pic_path, :class => "form-control" %>
           </div>
         </div>
         
-          <div class="form-group nick_name">
-            <div class="input-group input-group-lg">
-              <%= label_tag 'nick_name', "Nick Name", :class => "input-group-addon" %>
-              <%= text_field_tag 'nick_name', @user.nick_name, :class => "form-control" %>
-            </div>
+        <div class="form-group nick_name">
+          <div class="input-group input-group-lg">
+            <%= label_tag 'nick_name', "Nick Name", :class => "input-group-addon" %>
+            <%= text_field_tag 'nick_name', @user.nick_name, :class => "form-control" %>
           </div>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group input-group-lg">
+            <%= label_tag 'password', "Password", :class => "input-group-addon" %>
+            <%= password_field_tag 'password',  nil, placeholder: 'Example: password',:class => "form-control"%>
+          </div>
+        </div>
 
         <div class="form-group">
           <div class="input-group input-group-lg">
@@ -110,6 +146,7 @@
             <%= password_field_tag 'new_password',  nil, placeholder: 'Example: password',:class => "form-control"%>
           </div>
         </div>
+
         <div class="form-group">
           <div class="input-group input-group-lg">
             <%= label_tag 'repassword', "Confirm Password",  :class => "input-group-addon" %>
@@ -117,14 +154,9 @@
           </div>
         </div>
         
-          <%= submit_tag "Update", class: 'btn btn-primary btn-lg btn-block submit-button' %>
-        </div>
+        <%= submit_tag "Update(You must enter your password to update)", class: 'btn btn-primary btn-lg btn-block submit-button' %>
       <% end %>
-
-    
-      
     </div>
-
   </div>
 
 </div>

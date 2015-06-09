@@ -42,6 +42,9 @@
     <div class="col-md-8">
       <!-- restaurant list-->
       <div class="row">
+
+        <%= paginate @restaurants %>
+
         <ul class="media-list">
           <% @restaurants.each do |restaurant| %>
             <li class="media well">
@@ -69,15 +72,6 @@
             </li>
           <% end %>
         </ul>
-      </div>
-      <!-- pagination-->
-      <div class="row">
-        <div class="pagination pagination-inverse">
-          <a href="<%= restaurants_url + "?offset=#{@page[0]}" %>" class="btn btn-inverse previous <%= @page[0] == -1 ? "disabled":"" %>">
-            Previous
-          </a>
-          <a href="<%= restaurants_url + "?offset=#{@page[1]}" %>" class="btn btn-inverse next <%= @page[1] == -1 ? "disabled":"" %>">Next</a>
-        </div>
       </div>
     </div>
 

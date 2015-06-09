@@ -23,49 +23,12 @@ class RestaurantsController < ApplicationController
 	end
 
 	def index
-    # params = { term: 'food',
-     #           category_filter: 'pizza'
-    # }
-    #
-    # locale = { lang: 'en' }
-    #
-		# response = Yelp.client.search('Chicago', params, locale)
-    #
-		# @businesses = response.businesses
 
-    page_count = 30
-
-    count = Restaurant.count
-    @page = []
-
-    if params[:offset] && params[:offset].to_i > 0
-
-      offset = params[:offset].to_i
-
-      @restaurants = Restaurant.order("rating desc").limit(page_count).offset(offset)
-
-      # pagination
-      @page.push(offset - page_count)
-
-      if offset + page_count < count
-        @page.push(offset + page_count)
-      else
-        @page.push(-1)
-      end
-
-
+    if params[:page] && params[:page].to_i > 0
+      page = params[:offset].to_i
+      @restaurants = Restaurant.order("rating desc").page params[:page]
     else
-      @restaurants = Restaurant.order("rating desc").limit(page_count)
-
-      # pagination
-      @page.push(-1)
-
-      if page_count < count
-        @page.push(page_count)
-      else
-        @page.push(-1)
-      end
-
+      @restaurants = Restaurant.order("rating desc").page 0
     end
 
   end

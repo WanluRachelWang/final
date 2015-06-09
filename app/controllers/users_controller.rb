@@ -70,7 +70,11 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		
+
+		if session[:user_id].to_i != params[:id].to_i
+      redirect_to root_url, notice: "You cannot edit other users profile!"
+    end
+
 	end
 
 	def update

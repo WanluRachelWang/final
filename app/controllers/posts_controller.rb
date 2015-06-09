@@ -27,8 +27,13 @@ class PostsController < ApplicationController
     else
       @user = User.find_by(id:session["user_id"])
 
-      #get first 20 posts
+      #get first 20 posts and followers posts
       @posts = @user.posts.order("post_time desc").limit(20)
+
+      @user.followees.each do |followee|
+        @posts += followee.posts.order("post_time desc").limit(20)
+      end
+
     end
 
   end
