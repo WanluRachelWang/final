@@ -21,14 +21,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "follows", ["follower_id"], name: "index_follows_on_follower_id"
   add_index "follows", ["user_id"], name: "index_follows_on_user_id"
 
-  create_table "friends", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "friend_id"
-  end
-
-  add_index "friends", ["friend_id"], name: "index_friends_on_friend_id"
-  add_index "friends", ["user_id"], name: "index_friends_on_user_id"
-
   create_table "marks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "tag_id"
@@ -80,8 +72,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "url"
     t.string "phone"
     t.string "rating_img_url"
-    t.string "location_display_address"
     t.float  "rating"
+    t.string "location_display_address"
     t.string "snippet_text"
   end
 
@@ -94,7 +86,7 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "users", force: :cascade do |t|
     t.string   "user_name"
     t.string   "profile_pic_path"
-    t.boolean  "gender",           default: false
+    t.integer  "gender"
     t.datetime "id_created_time"
     t.string   "nick_name"
     t.string   "place"
