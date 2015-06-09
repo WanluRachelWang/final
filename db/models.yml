@@ -2,7 +2,7 @@ User
   user_name: string
   password_digest: string
   profile_pic_path: string
-  gender: boolean
+  gender: int
   id_created_time: datetime
   nick_name: string
   place: string
