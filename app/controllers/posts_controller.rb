@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     #if user has logged in, read user's posts and user's friends posts
     #if not, read recommend posts
 
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.order("name")
     
     if session[:user_id].blank?
       #if not logged in, read most recently 20 posts
