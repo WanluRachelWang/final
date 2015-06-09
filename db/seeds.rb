@@ -11,102 +11,10 @@ Tag.delete_all
 Post.delete_all
 Picture.delete_all
 Mark.delete_all
-Like.delete_all
 Reply.delete_all
-Friend.delete_all
 Follow.delete_all
 Restaurant.delete_all
 Place.delete_all
-
-#fakeData = JSON.parse(open('db/fakeData.json').read)
-
-# User
-#   user_name: string
-#   password: string
-#   salt: string
-#   profile_pic_path: string
-#   gender: boolean
-#   id_created_time: datetime
-#   nick_name: string
-#   place: string
-#   last_login_time: datetime
-
-#should create some default user here
-
-
-# Picture
-#   post_id: integer
-#   img_path: string
-#
-# fakeData["pictures"].each do |picture_hash|
-# 	picture = Picture.new
-# 	picture.post_id = picture_hash["post_id"]
-# 	picture.img_path = picture_hash["img_path"]
-# 	picture.save
-# end
-
-# Mark
-#   user_id: integer
-#   tag_id: integer
-
-# fakeData["marks"].each do |mark_hash|
-# 	mark = Mark.new
-# 	mark.user_id = mark_hash["user_id"]
-# 	mark.tag_id = mark_hash["tag_id"]
-# 	mark.save
-# end
-
-# Like
-#   user_id: integer
-#   post_id: integer
-
-# fakeData["likes"].each do |like_hash|
-# 	like = Like.new
-# 	like.user_id = like_hash["user_id"]
-# 	like.post_id = like_hash["post_id"]
-# 	like.save
-# end
-
-# Reply
-#   user_id: integer
-#   post_id: integer
-#   content: text
-#   time: datetime
-#
-# fakeData["replies"].each do |reply_hash|
-# 	reply = Reply.new
-# 	reply.user_id = reply_hash["user_id"]
-# 	reply.post_id = reply_hash["post_id"]
-# 	reply.content = reply_hash["content"]
-# 	reply.time = Time.at(reply_hash["time"]).to_datetime
-# 	reply.save
-# end
-
-
-# Friend
-#   user_id: integer
-#   friend_id: integer
-
-# fakeData["friends"].each do |friend_hash|
-# 	friend = Friend.new
-# 	friend.user_id = friend_hash["user_id"]
-# 	friend.friend_id = friend_hash["friend_id"]
-# 	friend.save
-# end
-
-# Follow
-#   user_id: integer
-#   follower_id: integer
-
-# fakeData["follows"].each do |follow_hash|
-# 	follow = Follow.new
-# 	follow.user_id = follow_hash["user_id"]
-# 	follow.follower_id = follow_hash["follower_id"]
-# 	follow.save
-# end
-
-# Tag
-#   tag_name: string
 
 Yelp.client.configure do |config|
   config.consumer_key = "qOxoGstzEM4ERC_BQxIltw"

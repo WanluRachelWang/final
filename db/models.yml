@@ -48,10 +48,6 @@ Reply
   content: text
   time: datetime
 
-Friend
-  user_id: integer
-  friend_id: integer
-
 Follow
   user_id: integer
   follower_id: integer
