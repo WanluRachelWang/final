@@ -1,6 +1,6 @@
 # WebDev-Final
-Final Project for WebDev
-This is a web social application where users can share comments for a restaurant, follow each other and look for good restaurants in Chicago
+- Final Project for WebDev
+- This is a web social application where users can share comments for a restaurant, follow each other and look for good restaurants in Chicago
 
 # Models
 - User
