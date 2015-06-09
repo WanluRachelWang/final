@@ -42,10 +42,6 @@ Mark
   user_id: integer
   tag_id: integer
 
-Like
-  user_id: integer
-  post_id: integer
-
 Reply
   user_id: integer
   post_id: integer

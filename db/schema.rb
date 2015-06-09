@@ -29,14 +29,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "friends", ["friend_id"], name: "index_friends_on_friend_id"
   add_index "friends", ["user_id"], name: "index_friends_on_user_id"
 
-  create_table "likes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_id"
-  end
-
-  add_index "likes", ["post_id"], name: "index_likes_on_post_id"
-  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
-
   create_table "marks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "tag_id"
